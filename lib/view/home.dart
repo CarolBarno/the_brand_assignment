@@ -175,7 +175,30 @@ class _HomeState extends State<Home> {
                                         );
                                       },
                                     )
-                                  : Container()
+                                  : Center(
+                              child: Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 2 * heightm,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/sad.png',
+                                    height: 10 * heightm,
+                                    width: 10 * widthm,
+                                    color: Colors.grey[500],
+                                  ),
+                                  SizedBox(
+                                    height: 2 * heightm,
+                                  ),
+                                  Text(
+                                    'No images found',
+                                    style: TextStyle(
+                                      fontSize: 2.5 * textm,
+                                      color: Colors.grey[800],
+                                    ),
+                                  )
+                                ],
+                              ))
                         ],
                       ),
                     ),
