@@ -85,10 +85,13 @@ class _HomeState extends State<Home> {
                   ],
                 ),
                 actions: [
-                  Icon(
-                    Icons.menu,
-                    color: Colors.deepOrange,
-                    size: 6 * widthm,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.menu,
+                      color: Colors.deepOrange,
+                      size: 6 * widthm,
+                    ),
                   ),
                 ],
               ),
