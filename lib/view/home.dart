@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:thebrandassignment/model/constants.dart';
+import 'package:thebrandassignment/provider/design_details_provider.dart';
 import 'package:thebrandassignment/provider/images_provider.dart';
+import 'package:thebrandassignment/view/image_details.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -13,10 +16,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ImagesProvider>.value(value: ImagesProvider())
+        ChangeNotifierProvider<ImagesProvider>.value(value: ImagesProvider()),
+        ChangeNotifierProvider<DesignDetailsProvider>.value(value: DesignDetailsProvider())
       ],
       child: Builder(builder: (context) {
         final imageList = Provider.of<ImagesProvider>(context);
+        final imageDetails = Provider.of<DesignDetailsProvider>(context);
         return SafeArea(
           child: DefaultTabController(
             length: 4,
@@ -159,19 +164,31 @@ class _HomeState extends State<Home> {
                                           (BuildContext context, int index) {
                                         List<Images> im =
                                             imageList.getImagesData();
-                                        return Column(
-                                          children: [
-                                            Image.network(
-                                                'https://itsthebrand.com/taswira.php?width=500&height=500&quality=100&cropratio=1:1&image=/v/uploads/gallery/${im[index].picture}'),
-                                            SizedBox(
-                                              height: 0.1 * heightm,
-                                            ),
-                                            Text(
-                                              '${im[index].title}',
-                                              style: TextStyle(
-                                                  fontSize: 2 * textm),
-                                            ),
-                                          ],
+                                        return InkWell(
+                                          onTap: () async {
+                                            await imageDetails.getDesignDetails(im[index].catalogId, im[index].designId).then((value) =>
+                                                Navigator.push(
+                                                    context,
+                                                    PageTransition(
+                                                        child: ImageDetails(imageDetails),
+                                                        type: PageTransitionType.fade)
+                                                )
+                                            );
+                                          },
+                                          child: Column(
+                                            children: [
+                                              Image.network(
+                                                  'https://itsthebrand.com/taswira.php?width=500&height=500&quality=100&cropratio=1:1&image=/v/uploads/gallery/${im[index].picture}'),
+                                              SizedBox(
+                                                height: 0.1 * heightm,
+                                              ),
+                                              Text(
+                                                '${im[index].title}',
+                                                style: TextStyle(
+                                                    fontSize: 2 * textm),
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     )

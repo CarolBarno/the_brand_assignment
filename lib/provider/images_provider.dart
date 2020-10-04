@@ -8,16 +8,22 @@ import 'package:thebrandassignment/model/register_api.dart';
 class Images {
   String title;
   String picture;
+  String catalogId;
+  String designId;
 
   Images({
     this.title,
     this.picture,
+    this.catalogId,
+    this.designId
   });
 
   factory Images.fromJson(Map<String, dynamic> json) {
     return Images(
       title: json["title"],
       picture: json["picture"],
+      catalogId: json["catalogid"].toString(),
+      designId: json["id"].toString(),
     );
   }
 }
