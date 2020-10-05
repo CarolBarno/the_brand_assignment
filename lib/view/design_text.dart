@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:thebrandassignment/model/constants.dart';
 import 'package:thebrandassignment/provider/image_text_provider.dart';
@@ -37,6 +38,7 @@ class _DesignTextsState extends State<DesignTexts> {
                 widget.d.getDesignTextData() != null
                     ? ListView.builder(
                         shrinkWrap: true,
+                    physics: ScrollPhysics(),
                         itemCount: widget.d.getDesignTextData().length,
                         itemBuilder: (BuildContext context, int index) {
                           List<DesignText> imd =
@@ -45,6 +47,7 @@ class _DesignTextsState extends State<DesignTexts> {
                           return ListView.builder(
                             shrinkWrap: true,
                             itemCount: t.length,
+                            physics: ScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
