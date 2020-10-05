@@ -14,6 +14,7 @@ class DesignDetails {
   String addDate;
   String viewNum;
   String description;
+  String id;
 
   DesignDetails({
     this.title,
@@ -23,7 +24,8 @@ class DesignDetails {
     this.public,
     this.addDate,
     this.viewNum,
-    this.description
+    this.description,
+    this.id
   });
 
   factory DesignDetails.fromJson(Map<String, dynamic> json) {
@@ -35,7 +37,8 @@ class DesignDetails {
       public: json["public"].toString(),
       addDate: json["adddate"].toString(),
       viewNum: json["viewnum"].toString(),
-      description: json["description"]
+      description: json["description"],
+      id: json["id"].toString(),
     );
   }
 }
